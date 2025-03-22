@@ -341,6 +341,10 @@ export default function PrepaymentPage() {
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    interaction: {
+      mode: 'index' as const,
+      intersect: false
+    },
     plugins: {
       legend: {
         position: 'top' as const,
@@ -364,11 +368,10 @@ export default function PrepaymentPage() {
     scales: {
       x: {
         ticks: {
-          maxTicksLimit: 12, // 限制显示的刻度数量
-          callback: function(value: any, index: number) {
-            const label = this.getLabelForValue(value)
-            // 每12个月显示一次
-            return index % 12 === 0 ? label : ''
+          maxTicksLimit: 12,
+          callback: function(value: any, index: number): string {
+            // 直接返回值的字符串形式
+            return index % 12 === 0 ? String(value) : ''
           }
         }
       },
@@ -378,7 +381,7 @@ export default function PrepaymentPage() {
           text: '剩余本金(元)'
         },
         ticks: {
-          callback: function(value: any) {
+          callback: function(value: any): string {
             return (value / 10000).toFixed(0) + '万'
           }
         }
