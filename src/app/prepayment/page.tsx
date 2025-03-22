@@ -13,7 +13,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartOptions
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 
@@ -338,7 +339,7 @@ export default function PrepaymentPage() {
     }
   }
 
-  const chartOptions = {
+  const chartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
     interaction: {
